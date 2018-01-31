@@ -1,0 +1,28 @@
+\documentclass{pracalicmgr}
+\usepackage{magisterka}
+\begin{document}
+	\section{Realizacja projektu}
+	\subsection{Wstępna analiza danych}
+	\subsection{Implementacja systemu}
+    \subsubsection{Reprezentacja obiektów}
+    Do zbudowania reprezentacji obiektów wejściowych i referencyjnych na pierwszej warstwie sieci wykorzystano atrybuty wyliczone przy pomocy następujących pakietów i programów:
+    \begin{itemize}
+        \item Cesium-ML %\cite{cesium}
+        \item VARTOOLS %\cite{vartools}
+        \item VaST %\cite{vast}
+        \item FATS %\cite{fats}
+        \item UPSILoN %\cite{upsilon}
+    \end{itemize}
+    Pełna lista wykorzystanych w pierwszej wersji realizacji systemu, razem ze szczegółami dotyczącymi ich implementacji, znajdują się w dodatku \ref{appendix:features}. Następnie przy użyciu metod opisanych w Części \ref{training:repr}, reprezentacja obiektów została ograniczona do następujących atrybutów:
+    
+    
+    Druga warstwa sieci zawiera dwa komparatory pozwalające na porównanie ogólnego kształtu sfazowanej krzywej blasku przy użyciu następujących algorytmów:
+    \begin{itemize}
+        \item DTW (ang. \textit{Dynamic Time Warping} - Dynamiczne odkształcanie czasu) 
+        \item TWED (ang. \textit{Time Warping Edit Distance} - Odległość edycyjna z odkształcaniem czasu)
+    \end{itemize} 
+    Krótki opis ich działania oraz zaimplementowany kod w języku Java dostępne są odpowiednio w Dodatkach \ref{appendix:code-1} oraz \ref{appendix:code-2}.
+    \subsubsection{Zbiór referencyjny}
+    \subsubsection{Implementacja sieci}
+    
+\end{document}

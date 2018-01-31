@@ -1,0 +1,136 @@
+\documentclass{pracalicmgr}
+\usepackage{magisterka}
+\begin{document}
+	\section{Sieci komparatorów rozmytych}
+    \subsection{Podstawowe zagadnienia}
+    Zastosowanie sieci komparatorów rozmytych do porównywania obiektów prostych i złożonych zaproponował w swojej pracy \citet{sosnowski:compar}. Podejście to opiera się o założenie, że z niezależnych od siebie, częściowych podobieństw pomiędzy poszczególnymi atrybutami porównywanych obiektów da się skonstruować miarę całościowego ich podobieństwa, wyrażoną liczbą z przedziału $\left[0,1\right]$. W tym celu, używany jest formalizm relacji rozmytych.
+    \subsubsection{Zbiory i relacje rozmyte} 
+    Zbiory rozmyte zostały zaproponowane przez Zadeha jako rozszerzenie klasycznej teorii zbiorów. W odróżnieniu do klasycznej teorii zbiorów, gdzie element może całkowicie należeć lub nie należeć do danego zbioru, w teorii zbiorów rozmytych, przynależność do zbioru może być częściowa.
+    \begin{defn}
+        Zbiorem rozmytym A nazywamy parę:
+        \begin{equation}
+            (\Omega,\mu_A),
+        \end{equation}
+        gdzie $\Omega$ jest zbiorem uniwersalnym, $\mu_A : \Omega \rightarrow [0,1]$ funkcją przynależności zbioru rozmytego A, natomiast $\mu_A(x) \in [0,1]$ jest stopniem przynależności elementu x do zbioru A.
+    \end{defn}
+    \textit{Funkcja przynależności} jest odpowiednikiem funkcji charakterystycznej w zbiorach klasycznych. Dla każdego $x \in U$, mówimy że $x$:
+    \begin{itemize}
+        \item nie należy do zbioru rozmytego $A$ kiedy $\mu_A(x)=0$. Jest to przypadkiem analogicznym do zbioru klasycznego
+        \item całkowicie należy do zbioru rozmytego $A$ kiedy $\mu_A(x)=1$. Jest to ponownie przypadek analogiczny do zbioru klasycznego.
+        \item częściowo należy do zbioru rozmytego $A$ kiedy $0<\mu_A(x)<1$.
+    \end{itemize}
+    
+    Zbiory rozmyte mogą pozwolić na modelowanie nieprecyzyjnych pojęć, używanych w języku naturalnym, takich jak np.  \textit{trochę}, \textit{duży}, \textit{dostatecznie} itd.
+    
+    Relacje rozmyte są rozszerzeniem pojęcia relacji z klasycznej teorii zbiorów, pozwalającym na częściową przynależność do danej relacji. Podobnie jak klasyczne relacje, modelują one związki pomiędzy dwoma elementami. 
+    \begin{defn}
+        Relacja rozmyta R pomiędzy dwoma niepustymi zbiorami nierozmytymi X i Y jest zbiorem rozmytym określonym na iloczynie kartezjańskim $X \bigtimes Y$ w postaci:
+        \begin{equation}
+            \label{rel_rozm}
+            R = \lbrace((x,y),\mu_R(x,y))\rbrace,\forall x \in X, \forall y \in Y,
+        \end{equation}
+        gdzie $\mu_R:X\bigtimes Y \rightarrow[0,1]$ jest funkcją przynależności do relacji rozmytej. $\mu_R(x,y) \in [0,1]$ jest stopniem przynależności, w jakim element $x$ jest w relacji z elementem $y$.
+    \end{defn} 
+     
+    \subsubsection{Podobieństwo i sąsiedztwo} 
+    Szczególnie istotnym typem relacji rozmytej jest relacja podobieństwa. Jest to rozszerzenie klasycznej relacji równoważności.
+    \begin{defn}
+        Relacją podobieństwa nazywamy taką relację rozmytą, która dodatkowo spełnia następujące warunki:
+        \begin{itemize}
+            \item zwrotność: $\mu_R(x,x) = 1, \forall x \in U$,
+            \item symetrycznośc: $\mu_R(x,y) = \mu_R(y,x), \forall x,y \in U$,
+            \item przechodniość: $\mu_R(x,z) \ge min\lbrace\mu_R(x,y),\mu_R(y,z)\rbrace,\forall x,y,z \in U$.
+        \end{itemize}
+    \end{defn}
+    W praktyce, trudno jest zagwarantować spełnienie warunku przechodniości, dlatego często rozważana jest mniej rygorystyczna relacja sąsiedztwa.
+    \begin{defn}
+    Relacja sąsiedztwa jest uproszczeniem relacji podobieństwa, w którym zrezygnowano z warunku przechodniości. Jest to więc relacja rozmyta która dodatkowo spełnia następujące warunki:
+    \begin{itemize}
+        \item zwrotność: $\mu_R(x,x) = 1, \forall x \in U$,
+        \item symetrycznośc: $\mu_R(x,y) = \mu_R(y,x), \forall x,y \in U$.
+    \end{itemize}
+    \end{defn}
+    Przy pomocy relacji podobieństwa i sąsiedztwa, możemy modelować bliskość, lub przybliżoną równość, pojedynczego atrybutu lub zbioru atrybutów pomiędzy dwoma obiektami, lub większą ich ilością. 
+      
+    \subsubsection{Komparatory rozmyte}
+    Komparatorem nazywano pierwotnie wyspecjalizowany element logiczny, używany do określenia wartości relacji większości lub równości między dwiema wprowadzonymi wartościami. Pojęcie to zostało przeniesione z elektroniki do informatyki, gdzie oznaczało ono funkcję pozwalającą na porównywanie i porządkowanie danych różnych typów. Wraz z rozwojem języków programowania i potrzebą porównywania coraz bardziej skomplikowanych struktur danych i obiektów, występujących w programach, również komparatory stawały się coraz bardziej złożone. Cały czas zwracały jednak tylko odpowiedzi w postaci pojedynczej wartości, określającej w jakiej relacji znajdują się względem siebie obiekty wejściowe.
+    
+    Komparatory rozmyte są rozszerzeniem tego konceptu, pozwalającym nie tylko na określenie, czy dane obiekty są równe, albo który z nich jest większy, ale również na znalezienia stopnia ich przynależności do relacji wzajemnego podobieństwa lub sąsiedztwa. 
+    
+    W przypadku zaproponowanej przez Sosnowskiego interpretacji komparatorów rozmytych, występuje rozróżnienie porównywanych obiektów na:
+    \begin{itemize}
+        \item obiekt wejściowy, czyli ten, który jest porównywany,
+        \item obiekt referencyjny, względem którego podobieństwo jest badane. W przypadku zastosowania sieci komparatorów złożonych do klasyfikacji, klasa obiektu referencyjnego jest znana. 
+    \end{itemize}
+    W sytuacji, kiedy w pojedynczym komparatorze porównujemy pojedynczy obiekt wejściowy do pojedynczego obiektu referencyjnego, możemy zamienić je miejscami. Wynika to z faktu, że ich reprezentacja jest taka sama a symetryczność relacji podobieństwa gwarantuje, że sposób wyliczania wartości przynależności do relacji nie zależy od kolejności parametrów wejściowych. Rozdział na obiekty wejściowe i referencyjne nabiera znaczenia dopiero kiedy mamy do czynienia ze złożoną siecią komparatorów i liczniejszymi zbiorami obiektów wejściowych i referencyjnych.
+    \subsubsection{Reprezentacja obiektu}
+    Podobnie jak w innych systemach podejmowania decyzji, obiekty złożone i proste nie są bezpośrednimi uczestnikami przetwarzania informacji w sieciach komparatorów złożonych. Przetwarzaniu podlega ich reprezentacja, wyrażana poprzez różne atrybuty czy parametry. Reprezentacja ta może być niejednakowa dla tego samego obiektu, w zależności od rodzaju procesu przetwarzania, celu i kontekstu.
+    
+    Istotnym zagadnieniem przy projektowaniu sieci komparatorów złożonych jest wybór, spośród wszystkich wyobrażalnych atrybutów i parametrów, którymi można opisać badany obiekt, takiego podzbioru, który będzie możliwie mały, jednocześnie pozwalając na jak najdokładniejsze rozróżnienie obiektów należących do różnych klas.
+    \subsubsection{Zbiór referencyjny}
+    W ogólniejszym przypadku, komparator rozmyty daje możliwość porównania obiektu wejściowego nie tylko z pojedynczym obiektem referencyjnym, a z całym zbiorem obiektów o takiej samej reprezentacji. Taki zbiór nazywamy zbiorem referencyjnym. Za Sosnowskim 
+    \begin{defn}
+        Zbiorem referencyjnym nazywamy niepusty zbiór uporządkowany, stanowiący podzbiór uniwersum $\Omega$. Zbiór ten składa się z obiektów, względem których wykonywane są porównania w komparatorze. Obiekty te są zgrupowane w jeden zbiór ze względu na pewne łączące je relacje i atrybuty lub pewną reprezentowaną wiedzę. Poszczególne elementy są odrębnymi instancjami obiektów z kombinacjami wartości atrybutów, rozpinającymi przestrzeń możliwych stanów cech obiektów, które są istotne dla zadanego komparatora lub grupy komparatorów. 
+    \end{defn}
+    Zbiór referencyjny jest niezbędny dla działania komparatora, a więc również sieci komparatorów. Nie jest jednak niezmienny na każdym kroku jej działania -- do konkretnych komparatorów wchodzących w skład sieci mogą być przekazywane na wejściu różne zbiory referencyjne, będące podzbiorami zbioru referencyjnego używanego przez sieć $ref_i \subseteq ref$.
+    \subsubsection{Agregacja i przetwarzanie danych}
+    Ważnym elementem sieci komparatorów rozmytych jest łączenie informacji z wielu źródeł w jeden obiekt. Ma to na celu stworzenie bardziej kompletnej informacji, poprzez złożenie szerszego spektrum atrybutów oraz wzajemne uzupełnianie się danych pochodzących z różnych źródeł. Ponadto, taka synteza danych pozwala również na reprezentację większej ilości informacji poprzez mniejszą liczbę parametrów, co pozwala na łatwiejsze przetwarzanie w kolejnych elementach sieci.
+    
+    Istotnie, to agregacja danych prowadzi do połączenia zbioru niezależnych od siebie komparatorów w całościowy byt, który nazywamy tu siecią, oraz, ostatecznie, do otrzymania pojedynczego parametru, pozwalającego na określenie podobieństwa między dwoma badanymi obiektami. Elementy sieci, dokonujące agregacji danych, nazywamy agregatorami.
+    
+    W projekcie wykorzystane zostały trzy metody agregacji danych: średnia arytmetyczna, średnia ważona oraz głosowanie metodą Copelanda, którego opis znajduje się poniżej.
+    \begin{defn}
+        Metoda Copelanda jest metodą rozstrzygania głosowań z więcej niż dwoma kandydatami. Polega ona na przeprowadzeniu serii indywidualnych głosowań pomiędzy wszystkimi parami kandydatów. Zwycięzcą całego głosowania jest kandydat, mający najwyższy stosunek wygranych do przegranych, po rozstrzygnięciu wszystkich takich pojedynków.
+    \end{defn}
+    Dużą zaletą metody Copelanda jest jej przejrzystość, a jej główną wadą -- duża złożoność obliczeniowa ($O(n^2)$) w porównaniu z pozostałymi zastosowanymi metodami. 
+    
+    Elementami sieci pokrewnymi do agregatorów są translatory i operatory rzutowania, których zadaniem jest przetwarzanie danych pomiędzy warstwami w sieci. W sieciach monolitycznych, czyli przetwarzających obiekty proste, takich jak system będący przedmiotem tej pracy, stanowią one znacznie mniej istotny element, niż komparatory i agregatory. Wynika to z faktu, że w sieciach monolitycznych, reprezentacja porównywanego obiektu jest niezmienna pomiędzy kolejnymi warstwami. Przez to translator w sieci monolitycznej jest operatorem tożsamości, a jedynym działaniem, jakie powinno zostać wykonane przez operator rzutowania, jest wyzerowanie wartości wszystkich atrybutów obiektu, dla których komparatory nie występują na kolejnych warstwach. W praktyce nawet to może zostać pominięte bez istotnego wpływu na wydajność sieci.
+    \subsection{Konstrukcja sieci}
+    Jak zostało wspomniane w poprzednim punkcie, sieć budowana jest ze zbioru komparatorów, poprzez agregację danych wyjściowych z różnych jego elementów. Każdy podzbiór komparatorów, z których dane agregowane są razem, nazywamy warstwą. Wszystkie komparatory należące do jednej warstwy są od siebie niezależne i mogą działać równobieżnie. Z kolei poszczególne warstwy wykonywane są sekwencyjnie, w ustalonej kolejności, a dane wyjściowe wcześniejszych warstw mogą zostać użyte jako dane wejściowe do warstw późniejszych. Informacje uzyskane z wcześniejszej warstwy mogą na przykład pozwolić na zawężenie zbioru referencyjnego dla komparatorów znajdujących się na warstwie późniejszej, lub na ustalenie innych parametrów, które mogą zostać później użyte w dowolny sposób. Jeden komparator może znajdować się na więcej niż jednej warstwie -- w takim przypadku, zostanie on wykonany więcej niż raz, być może z różnymi parametrami lub zbiorami referencyjnymi, zależnymi od warstwy. Diagramy przedstawiające schematy przykładowych sieci znajdują się na ilustracji %\ref{network:schematics}.
+    
+    Warstwy mogą grupować komparatory ze względu na pewien kontekst związany z przetwarzanymi cechami lub strukturą obiektu, albo ze względu na pewne właściwości samych komparatorów. Zależnie od typu obiektu, który przetwarzać ma sieć, metodologia podziału komparatorów pomiędzy warstwami może być różna. W przypadku obiektów złożonych, może ona być zależna od reprezentacji obiektu -- wcześniejsze warstwy dotyczą jego bardziej podstawowych elementów składowych, a późniejsze atrybutów wyższego poziomu. Z kolei w przypadku obiektów prostych, które nie składają się z pod-obiektów, i których poszczególne atrybuty są od siebie niezależne, często bardziej zasadnym jest podział ze względu na koszt wykonania porównania przez dany komparator. W ten sposób, w na niższych warstwach znajdują się komparatory, których koszt jest niższy, a pomiędzy kolejnymi warstwami następuje zawężenie zbiorów referencyjnych, przez co bardziej kosztowne operacje porównania wykonywane są mniejszą ilość razy. Taka metodologia została przyjęta w tej pracy.
+    \subsection[Klasyfikacja obiektów]{Zastosowanie sieci komparatorów rozmytych do klasyfikacji obiektów}
+    Zadaniem sieci komparatorów rozmytych jest wyznaczenie wartości podobieństwa pomiędzy dwoma obiektami. Podstawowe założenie, które należy przyjąć, aby tę wartość wykorzystać do klasyfikacji, jest następujące: jeżeli dwa obiekty są do siebie dostatecznie podobne (lub dostatecznie blisko ze sobą sąsiadują), pod wystarczająco wieloma względami, to z dużym prawdopodobieństwem należą do tej samej klasy obiektów. Podobne podejście stosowane jest w jednej z metod klasyfikacji bez nadzoru, znanej jako analiza skupień lub klasteryzacja (ang. \textit{data clustering}), polegającej na grupowaniu obiektów we względnie jednorodne klasy w oparciu o miarę podobieństwa.
+    
+    Zakładane jest ponadto, że wyższy stopień przynależności do relacji podobieństwa (lub sąsiedztwa) między dwoma obiektami, implikuje wyższą wartość prawdopodobieństwa, że oba należą do tej samej klasy. To prawdopodobieństwo sięga 1,  kiedy obiekty są od siebie nieodróżnialne.
+    
+    W celu sklasyfikowania badanego obiektu, poszukiwany jest obiekt ze zbioru referencyjnego, który jest do niego najbardziej podobny. Następnie, jeżeli wartość podobieństwa między nimi jest wyższa od pewnej wartości progowej $p$, uznajemy, że badany obiekt należy do tej samej klasy, co wybrany obiekt referencyjny.
+    \subsection{Strojenie sieci}
+    Wszystkie komparatory i agregatory wchodzące w skład sieci posiadają szereg parametrów i atrybutów, dla których należy ustalić odpowiednie wartości, pozwalające na uzyskanie jak najlepszej dokładności klasyfikacji. Pokrewnym zagadnieniem jest znalezienie zbioru referencyjnego, który pozwala na rozróżnienie pomiędzy jak największą ilością poszczególnych klas obiektów zawierając przy tym możliwie jak najmniej elementów. Kolejnym elementem sieci, który może podlegać strojeniu, jest zbiór atrybutów, używanych do opisu porównywanych obiektów.
+    \subsubsection{Strojenie parametrów progowych komparatorów}
+    Każdy komparator posiada wartość progową $p$, która pozwala oddzielić istotne wartości funkcji podobieństwa dla dwóch przedmiotów od przypadkowych zbieżności. Głównym zadaniem tej wartości jest ograniczenie propagowania zbyt słabych wyników. Większość systemów klasyfikacyjnych posiada podobną funkcjonalność, pozwalającą określić próg prawdopodobieństwa sklasyfikowania danego obiektu jako należącego do poszukiwanej kategorii. W przypadku sieci komparatorów rozmytych, takie ograniczenie jest sprawdzane już na poziomie pojedynczych atrybutów. 
+    
+    Im wyższa wartość $p$, tym bardziej obiekt wejściowy musi być podobny do referencyjnego, aby ich wartość przynależności funkcji podobieństwa została przekazana do dalszych elementów sieci. Wartości podobieństwa, które nie wynoszą przynajmniej $p$ ustalane są na $0$.
+    Wartość $p$ może być ustalona przez eksperta, może też podlegać uczeniu maszynowemu, na przykład przez algorytmy ewolucyjne. Wartości $p$ mogą być ustalane indywidualnie dla poszczególnych komparatorów oraz dla różnych klas obiektów referencyjnych. 
+    
+    Strojenie parametrów progowych komparatorów służy przede wszystkim poprawieniu dokładności klasyfikacji, a przyspieszenie działania sieci jest w najlepszym przypadku korzystnym skutkiem ubocznym, z zasady nie można oczekiwać, że zajdzie.
+    \subsubsection{Strojenie wag komparatorów}
+    W przypadku agregacji danych przez głosowanie lub średnią ważoną, każdy komparator posiada parametr $w$, który określa wagę jego głosów w agregatorze. Im niższe $w$ tym mniejszy wpływ wyników z danego komparatora, na ostateczny wynik na wyjściu z agregatora. Podobnie jak w przypadku wartości progowej $p$, waga $w$ może być indywidualnie ustalona dla każdego komparatora przez eksperta, może też podlegać uczeniu przez algorytmy ewolucyjne.
+    
+    Strojenie wag agregatorów ma na celu poprawienie dokładności klasyfikacji i raczej nie wpływa na szybkość działania sieci.
+    \subsubsection{Dobór zbioru referencyjnego} \label{training:ref}
+    Dobór takiego zbioru referencyjnego, że jego elementy, zgodnie z założeniami wynikającymi z definicji, dokładnie rozpinają przestrzeń możliwych stanów cech dla wszystkich badanych kategorii obiektów, jest podstawowym zadaniem w konstrukcji sieci komparatorów złożonych. Nie sposób wyobrazić sobie, aby sieć zwracała właściwe klasyfikacje, jeśli w jej zbiorze referencyjnym brakowałoby na przykład przedstawicieli jednej z klas. Podobnie, można by oczekiwać zaburzenia wyników, gdyby któryś atrybut przedstawicieli pewnej klasy w zbiorze referencyjnym przyjmował wartości tylko z części zakresu, które mógłby przyjmować w ogólnym wypadku.
+    
+    Z drugiej strony nadmierny rozrost zbioru referencyjnego znacznie spowalnia działanie całej sieci, a położenie zbytniej wagi na obserwacje odstające i przypadki szczególne, bez zachowania wystarczająco dużej reprezentacji typowych obiektów, może doprowadzić do nadmiernego dopasowania modelu. W takim przypadku system, oparty o zbyt skomplikowaną reprezentację danych, doskonale modeluje dane ze zbioru treningowego, ale tracona jest jego zdolność do generalizacji i działania z nieznanymi wcześniej danymi.
+    
+    Zbiór referencyjny może być skonstruowany ręcznie przez eksperta, albo wygenerowany automatycznie na kilka różnych sposobów. Jednym z podejść do tego zagadnienia jest zaczęcie od minimalnego zbioru opisanych obiektów, zawierającego po kilka obiektów dla każdej klasy, a następnie analizę statystyczną niepoprawnie sklasyfikowanych obiektów ze zbioru testowego, w poszukiwaniu takich podzbiorów, które mają jak najwiecej cech wspólnych i dodawaniu do zbioru referencyjnego charakterystycznych obiektów należących do tych grup. Taki proces można iterować, aż do osiągnięcia zadowalających wyników.
+    
+    Z drugiej strony, można zacząć od zbioru referencyjnego zawierającego nadmiar opisanych obiektów i zawężać go -- na przykład poprzez wybieranie za każdym razem losowego podzbioru z niego. Można również rozdzielić zbiór referencyjny na podzbiory, które będą do siebie nawzajem porównywane przez sieć komparatorów, przy czym obiekty o najwyższej wartości podobieństwa do innych, również zawartych w zbiorze referencyjnym, traktować należy jako kandydatów do usunięcia. Taki proces również jest iterowany, aż do momentu otrzymania zbioru referencyjnego o jak najmniejszym rozmiarze, bez zatracenia dokładności klasyfikacji.
+    
+    Ostatnią metodą jest wybór losowego podzbioru ze wszystkich dostępnych, opisanych i nieopisanych obiektów i dokonanie klasteryzacji, co pozwala nam pogrupować podobne do siebie obiekty referencyjne na grupy o ustalonej wcześniej maksymalnej wielkości. Po zakończeniu tego procesu, przygotowane w ten sposób klastry mogą zostać odrzucone lub zaakceptowane i opisane przez eksperta, co pozwala użyć tak skonstruowanego zbioru jako zbioru referencyjnego. Ta metoda pozwala uniknąć błędów systematycznych, typowych dla systemów uczenia maszynowego strojonych jedynia na podstawie opisanych danych. Metoda klasteryzacji danych typowych dla obserwacji fotometrycznych jest opisana w pracy %\ref{mackenzie:clustering}
+    \subsubsection{Dobór reprezentacji} \label{training:repr}
+    Dobór zbioru atrybutów wchodzących w skład reprezentacji obiektu jest, podobnie jak dobór zbioru referencyjnego, procesem przebiegającym w dwóch kierunkach. Z jednej strony, do reprezentacji dodawane są nowe atrybuty, pozwalające na rozróżnienie kolejnych klas obiektów lub opisanie wcześniej nie obsługiwanych przypadków. Z drugiej strony, istotne jest utrzymanie jak najprostszej i najmniejszej reprezentacji, co wymaga usuwania z niej najmniej istotnych atrybutów w miarę dodawania nowych.
+    
+    W przypadku dodawania kolejnych atrybutów, celem jest poprawienie dokładności klasyfikacji, należy jednak być ostrożnym. Istnieje ryzyko, że dodanie nadmiarowych atrybutów może doprowadzić do zaburzenia ostatecznych wyników. Przykładowo, wykorzystanie kilku atrybutów, które są ze sobą bardzo silnie skorelowane, może wpłynąć na sztuczne podniesienie istotności tych atrybutów w procesie agregacji. W przypadku zastosowania agregatorów z wagami ten problem można rozwiązać, kalibrując od nowa wagi wszystkich komparatorów po dodaniu nowego. Niezależnie od tego, może również nastąpić zjawisko nadmiernego dopasowania. 
+    
+    Usuwanie zbędnych atrybutów z reprezentacji ma za zadanie zapobiec nadmiernemu dopasowaniu oraz innym formom zaburzania ostatecznych wyników. Dodatkowo, zawężenie zbioru  używanych komparatorów, a co za tym idzie, również wyliczanych atrybutów, potrafi bardzo silnie przyczynić się do przyspieszenia działania sieci.
+
+    Jedną ze strategii na stworzenie reprezentacji jest początkowe wykorzystywanie wszystkich możliwych atrybutów, do których ma się dostęp i rozszerzanie zbioru atrybutów, aż do czasu osiągnięcia zadowalającej dokładności klasyfikacji na zbiorze treningowym, a dopiero potem zawężanie przy pomocy algorytmów ewolucyjnych, analizy głównych składowych, lub ręcznej eliminacji atrybutów, dających najmniejszy zysk informacji, albo najmocniej skorelowanych z innymi atrybutami należącymi do reprezentacji. Taki proces można powtarzać kilkakrotnie, na przemian z cyklami strojenia wag komparatorów i parametrów progowych należących do reprezentacji komparatorów.
+    
+    Pokrewnym problemem jest też strojenie struktury sieci i ustalanie, na których jej warstwach będą znajdować się wykorzystane komparatory. Ten proces może doprowadzić zarówno do przyspieszenia działania sieci jak i poprawienia dokładności klasyfikacji. Jest trudny do przeprowadzenia bez pomocy metod uczenia maszynowego, jako, że zależności między poszczególnymi atrybutami są często nieznane a ręczne próby odkrycia ich metodą prób i błędów są, dla dostatecznie złożonej sieci, zbyt czasochłonne.
+    
+    Automatyczne strojenie zbioru atrybutów wchodzących w skład reprezentacji obiektu może być połączone z jednoczesnym strojeniem parametrów progowych i wag porównujących je komparatorów, oraz z wyborem warstwy, na której będą się znajdować. Przykładowo, jeśli do uczenia sieci użyty jest algorytm ewolucyjny, genotypem może być lista zawierająca dla każdego komparatora informacje o tym, czy wchodzi on w skład sieci, oraz jego wagę i wartość progową. Tak zaprojektowany proces może trwać dłużej, niż strojenie każdego zbioru parametrów osobno, ale gwarantuje lepsze wyniki.
+    \subsubsection{Inne}
+    Poza wymienionymi powyżej atrybutami sieci komparatorów rozmytych, istnieje wiele innych, które również mogą podlegać treningowi i strojeniu, a zostały tutaj pominięte, gdyż w systemie będącym przedmiotem tej pracy ich wartości nie podlegały zmianom. Jako przykład można tu podać \textit{funkcję filtrującą}, która ma za zadanie zminimalizować liczbę wyników niezerowych zwracanych przez komparator albo \textit{funkcję wyostrzania}, która ma na celu zwiększenie odległości pomiędzy wynikami najlepszymi, średnimi oraz najsłabszymi. Pełną listę tych atrybutów, razem z proponowanymi metodami ich strojenia, znaleźć można w pracach \citep{sosnowski:compar,  sosnowski:training}.
+    \subsection[Schemat działania sieci]{Schemat działania sieci komparatorów rozmytych}
+\end{document}

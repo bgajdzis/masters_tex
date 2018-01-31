@@ -1,0 +1,98 @@
+\ProvidesPackage{magisterka}
+%imports
+\usepackage{standalone}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[polish]{babel}
+\usepackage{babelbib}
+\usepackage[unicode]{hyperref}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{float}
+%\usepackage{caladea}
+\usepackage{microtype}
+\usepackage{geometry}
+\usepackage{ragged2e}
+\usepackage{stackrel}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{titling}
+%\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{ragged2e}
+\usepackage[affil-sl,auth-sc]{authblk}
+\usepackage{setspace}
+\usepackage{makeidx}
+\usepackage{amsfonts}
+\usepackage{blindtext}
+\usepackage{textcomp}
+\usepackage{pgfplots}
+%\usepackage{titling}
+\usepackage[11pt]{extsizes}
+\usepackage{indentfirst}
+\usepackage{mathtools}
+\usepackage[toc,page]{appendix}
+\usepackage[sort,semicolon,round,merge,elide,authoryear]{natbib}
+\usepackage[nottoc]{tocbibind}
+\usepackage{subfig}
+
+%set variables
+\setlength{\parindent}{0.5cm}
+\setlength{\parskip}{0pt plus 0.1pt}
+\setlength{\headheight}{25pt}
+\floatstyle{boxed}
+\restylefloat{figure}
+\pagestyle{fancy}
+\newlength{\plotwidth}
+\setlength\plotwidth{0.9\textwidth}
+\pgfplotsset{width=\plotwidth,compat=1.9}
+\hyphenpenalty=100		
+\clubpenalty=10000			
+\widowpenalty=10000			
+\brokenpenalty=10000		
+\exhyphenpenalty=10000		
+\righthyphenmin=3		
+\pretolerance 50
+\hbadness=1450
+\tolerance 750
+\setlength{\emergencystretch}{10pt}
+\vfuzz\hfuzz
+\graphicspath{{ryciny/}}
+\renewcommand{\labelitemi}{\fontsize{4}{12}$\blacksquare$}
+\renewcommand{\labelitemii}{\fontsize{4}{12}$\blacklozenge$}
+\renewcommand{\appendixtocname}{Dodatki}
+\renewcommand{\appendixpagename}{Dodatki}
+\renewcommand{\appendixname}{Dodatek}
+\addappheadtotoc
+\bibliographystyle{abbrvnat}
+\floatstyle{boxed} 
+\restylefloat{figure}
+
+\newtheoremstyle{definicja}
+{\topsep}   % above space
+{\topsep}   % below space
+{\itshape}  % body font
+{0pt}       % indent
+{\bfseries} % head font
+{}         % head punctuation
+{5pt plus 1pt minus 1pt} % HEADSPACE
+{} % CUSTOM-HEAD-SPEC
+\theoremstyle{definicja}
+\newtheorem{defn}{Definicja}
+
+%set author data
+\author{Bartłomiej Gajdzis}
+%\nralbumu{361644}
+\title{Automatyczna klasyfikacja krzywych blasku gwiazd okresowo zmiennych przy użyciu sieci komparatorów rozmytych}
+%\tytulang{Automatic classification of periodically variable star light curves using fuzzy comparator networks}
+%\kierunek{Fizyka}
+%\specjalnosc{$<$Specjalność-o-ile-dotyczy$>$}
+%\opiekun{$<$Profesor Igor Soszyński$>$\\$<$Zakład-lub-Katedra$>$ \\ $<>$}
+%\dziedzina{13.2 Fizyka}
+%\keywords{automatyczna klasyfikacja, uczenie maszynowe, gwiazdy zmienne, analiza szeregów czasowych}
+\date{\today}
